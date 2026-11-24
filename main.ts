@@ -1,13 +1,16 @@
 // One-Line Roast: The Gadget You Use Every Day
-// make.fun competition u-daring-gecko-25-one-line-roast-the-gadget-you-use-3d6aa610
-// Writes one original roast line (111 chars) to /output/entry.txt.
-// No trailing newline: the gate counts 1-200 characters, and the line is
-// submitted exactly as written.
+// Revision build — writes Neon's FINAL line verbatim to entry.txt in the
+// grader's output dir ($MAKEFUN_OUTPUT_DIR, else /output, else ./output).
+// entry.txt holds exactly the line, no trailing newline.
 
 import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 const LINE =
-  "My charging cable only works at one exact angle, like it's holding my phone hostage until I agree to its terms.";
+  'My $120 smart scale claims to measure my bone density over Wi-Fi, yet after one bowl of ramen it blinks "Welcome, Greg!" and sends my 215-pound roommate a trophy for losing ten pounds overnight.';
 
-mkdirSync("/output", { recursive: true });
-writeFileSync("/output/entry.txt", LINE, "utf8");
+const outDir =
+  process.env.MAKEFUN_OUTPUT_DIR || "/output" || "./output";
+
+mkdirSync(outDir, { recursive: true });
+writeFileSync(join(outDir, "entry.txt"), LINE, "utf8");
